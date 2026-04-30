@@ -48,7 +48,7 @@ This tool automates PQC readiness assessment for IoT protocol traffic -- detect 
 ## Installation
 
 ```bash
-git clone https://github.com/amarsohail/pqc-iot-analyzer.git
+git clone https://github.com/digitalinnovator/pqc-iot-analyzer.git
 cd pqc-iot-analyzer
 cargo build --release
 ```
@@ -205,7 +205,7 @@ Unit tests cover each protocol parser, crypto detection, and the scoring algorit
 
 ## Related Work
 
-- **[KeyPact](https://github.com/AmarSohail/keypact)** -- Hybrid PQC key agreement library in Rust.
+- **[KeyPact](https://github.com/digitalinnovator/keypact)** -- Hybrid PQC key agreement library in Rust.
 
 ## Author
 
