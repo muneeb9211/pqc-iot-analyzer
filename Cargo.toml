@@ -6,7 +6,7 @@ authors = ["Muhammad Amar Sohail <amarsohail838@gmail.com>"]
 description = "A PQC-ready IoT protocol analyzer that inspects CoAP, MQTT, and RPL traffic for post-quantum cryptographic readiness"
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/amarsohail/pqc-iot-analyzer"
+repository = "https://github.com/digitalinnovator/pqc-iot-analyzer"
 keywords = ["post-quantum", "iot", "cryptography", "coap", "mqtt"]
 categories = ["command-line-utilities", "cryptography", "network-programming"]
 
