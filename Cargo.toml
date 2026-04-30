@@ -1,0 +1,26 @@
+[package]
+name = "pqc-iot-analyzer"
+version = "0.1.0"
+edition = "2021"
+authors = ["Muhammad Amar Sohail <amarsohail838@gmail.com>"]
+description = "A PQC-ready IoT protocol analyzer that inspects CoAP, MQTT, and RPL traffic for post-quantum cryptographic readiness"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/amarsohail/pqc-iot-analyzer"
+keywords = ["post-quantum", "iot", "cryptography", "coap", "mqtt"]
+categories = ["command-line-utilities", "cryptography", "network-programming"]
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+hex = { version = "0.4", features = ["serde"] }
+thiserror = "1"
+
+[[bin]]
+name = "pqc-iot-analyzer"
+path = "src/main.rs"
+
+[lib]
+name = "pqc_iot_analyzer"
+path = "src/lib.rs"

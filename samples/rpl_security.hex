@@ -1,0 +1,30 @@
+# RPL control message samples -- PQC-Ready IoT Protocol Analyzer
+# ICMPv6 RPL packets (type=0x9B) with various security configurations.
+
+# 1. RPL DIS (DODAG Information Solicitation) -- unsecured
+#    Type=0x9B Code=0x00 Checksum=0x1234
+9B001234
+
+# 2. RPL DIO -- unsecured, with DODAG base object
+#    Type=0x9B Code=0x01 Checksum=0xABCD
+#    DIO Base: InstanceID=1 Version=2 Rank=0x0100 (256)
+#    G=1 MOP=2 Prf=0 DTSN=0 Flags=0 Reserved=0
+#    DODAGID = fd00::1 (16 bytes)
+9B01ABCD 01020100 90000000 FD000000 00000000 00000000 00000001
+
+# 3. RPL Secure DIO with ECDSA-P256 -- quantum-vulnerable
+#    Type=0x9B Code=0x81 (Secure DIO) Checksum=0x5678
+#    Security section: level=3 algorithm=2 (ECDSA-P256) + 4 pad bytes
+#    Then DIO base (24 bytes)
+9B815678 03020000 00000101 01008000 0000FD00 00000000 00000000 00000000 0001
+
+# 4. RPL Secure DIO with AES-128-CCM -- quantum-safe
+#    Type=0x9B Code=0x81 Checksum=0x9ABC
+#    Security section: level=5 algorithm=0 (CCM-AES-128)
+9B819ABC 05000000 00000201 00809000 0000FD00 00000000 00000000 00000000 0002
+
+# 5. RPL Secure DAO with RSA-SHA256 -- quantum-vulnerable
+#    Type=0x9B Code=0x82 (Secure DAO) Checksum=0xDEF0
+#    Security section: level=3 algorithm=1 (RSA-SHA256) + 4 pad bytes
+#    DAO base: InstanceID=1 K=0 DAOSequence=5 Reserved=0
+9B82DEF0 03010000 00000100 0500
