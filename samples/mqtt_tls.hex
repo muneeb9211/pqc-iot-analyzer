@@ -1,0 +1,26 @@
+# MQTT sample packets -- PQC-Ready IoT Protocol Analyzer
+# Hex-encoded MQTT packets, some with embedded TLS records in payload.
+
+# 1. MQTT CONNECT v3.1.1, clean session, keepalive=60, client_id="sensor01"
+#    Fixed header: type=1 flags=0 remaining_len=22
+#    Variable: proto_name_len=4 "MQTT" version=4 connect_flags=0x02 keepalive=0x003C
+#    Payload: client_id_len=8 "sensor01"
+10160004 4D515454 04020038 00087365 6E736F72 3031
+
+# 2. MQTT PUBLISH QoS=0, topic="home/temp", payload="23.1"
+#    Fixed header: type=3 flags=0 remaining_len=15
+#    Topic length=9 "home/temp" + payload "23.1"
+300F0009 686F6D65 2F74656D 7032332E 31
+
+# 3. MQTT PUBLISH with RSA OID in payload (simulating certificate exchange)
+#    Topic="device/cert", payload contains RSA encryption OID 1.2.840.113549.1.1.1
+#    encoded as DER: 06 09 2A 86 48 86 F7 0D 01 01 01
+302C000B 64657669 63652F63 65727406 092A8648 86F70D01 01010500 03480030 4500024F 00AABBCC
+
+# 4. MQTT PUBLISH with ECDSA OID in payload
+#    Topic="device/sign", payload contains ECDSA-SHA256 OID 1.2.840.10045.4.3.2
+#    DER: 06 08 2A 86 48 CE 3D 04 03 02
+3024000B 64657669 63652F73 69676E06 082A8648 CE3D0403 02034800 30450002 2100AABB
+
+# 5. MQTT CONNECT v5.0
+10180004 4D515454 05020060 00000008 73656E736F723032

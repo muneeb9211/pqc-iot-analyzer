@@ -1,0 +1,32 @@
+# CoAP over DTLS sample packets -- PQC-Ready IoT Protocol Analyzer
+# Each line is a hex-encoded packet. The format is simplified:
+# CoAP header + payload, where payload may contain a DTLS record.
+
+# 1. CoAP CON GET (no security -- plaintext)
+#    Ver=1 T=CON TKL=2 Code=GET MsgID=0x0001 Token=AABB
+#    Option: Uri-Path (11) delta=11(0xB) len=4 "temp"
+4201000100AABBB474656D70
+
+# 2. CoAP NON 2.05 Content with payload "temp=22.5"
+#    Ver=1 T=NON TKL=1 Code=2.05(0x45) MsgID=0x0042 Token=CC
+#    0x51 = ver=1 T=01(NON) TKL=0001(1)
+514500420CCFF74656D703D32322E35
+
+# 3. CoAP CON POST with DTLS 1.2 ServerHello carrying ECDHE_ECDSA_AES128_GCM_SHA256
+#    Ver=1 T=CON TKL=0 Code=POST MsgID=0x0010
+#    Payload starts with DTLS record:
+#      ContentType=22 (Handshake) Version=FEFD (DTLS 1.2) Epoch=0000
+#      SeqNum=000000000001 Length=0030 (48 bytes)
+#      Handshake: type=2 (ServerHello) len=00002A msg_seq=0000
+#      frag_offset=000000 frag_len=00002A
+#      ServerHello body: version=FEFD random=32 bytes sid_len=0
+#      cipher_suite=C02B (TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256)
+4002001000FF16FEFD00000000000000010030020000002A000000000000002AFEFD0102030405060708091011121314151617181920212223242526272829303100C02B00
+
+# 4. CoAP with DTLS using RSA (quantum-vulnerable key exchange)
+#    Same structure as above but cipher_suite=009C (TLS_RSA_WITH_AES_128_GCM_SHA256)
+4002002000FF16FEFD00000000000000020030020000002A000000000000002AFEFD0102030405060708091011121314151617181920212223242526272829303100009C00
+
+# 5. CoAP with DTLS using PSK (quantum-safe symmetric-only)
+#    cipher_suite=C0A4 (TLS_PSK_WITH_AES_128_CCM)
+4002003000FF16FEFD00000000000000030030020000002A000000000000002AFEFD01020304050607080910111213141516171819202122232425262728293031000000C0A400
