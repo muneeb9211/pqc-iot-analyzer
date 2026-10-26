@@ -209,7 +209,7 @@ Unit tests cover each protocol parser, crypto detection, and the scoring algorit
 
 ## Author
 
-Muneeb Ahmad (muneebahmad9211@gmail.com)
+Muneeb Ahmad 
 
 ## License
 
